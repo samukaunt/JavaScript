@@ -1,0 +1,65 @@
+<meta charset="UTF-8" />
+<script >
+	function init(){
+		var botao = document.getElementById("botao")
+		botao.onclick = function(){
+			var inputs = document.getElementsByTagName("input");
+			var linha = document.createElement("tr");
+			for (var i = 0; i < inputs.length; i++){
+				var input = inputs[i];
+				var valor = input.value;
+				if(!valor){
+					var nome = input.name;
+					alert("Brother "+ nome+" está vazio!");
+					return;
+				}
+				var celula = document.createElement("td");
+				celula.innerText = valor;
+				linha.appendChild(celula);
+			}
+			var celula = document.createElement("td");
+			
+			var remover = document.createElement("button");
+			remover.innerText = "Remover";
+			remover.onclick = function(){
+				document.getElementById("lista_alunos").removeChild(linha);
+				var span = document.getElementById("total_alunos");
+				var total = span.innerText;
+				total--;
+			}
+			celula.appendChild(remover);
+			linha.appendChild(celula);
+			
+			document.getElementById("lista_alunos").appendChild(linha);
+			
+			var span = document.getElementById("total_alunos");
+			var total = span.innerText;
+			total++;
+			span.innerText = total;			
+			for (var i = 0; i < inputs.length; i++){
+				inputs[i].value = "";
+			}
+		}
+	}
+</script>
+<body onload="init();">
+	<h1 onclick="alert('titulo clicado');">Lançar Nota de Alunos</h1>
+	<div id="novo_aluno">
+		<label for="input_nome">Nome:</label><input id="input_nome" name="nome" /><br>
+		<label for="input_nota1">Nota 1:</label><input id="input_nota1" name="nota1" type="number" /><br>
+		<label for="input_nota2">Nota 2:</label><input id="input_nota2" name="nota2" type="number"/><br>
+		<button type="button" id="botao">
+		Adicionar
+		</button>
+	</div>
+	<br>
+	<br>
+	<div id="alunos">
+		<table id="lista_alunos" border="1">
+			<tr>
+				<th>Aluno</th><th>Nota 1</th><th>Nota 2</th><th>Ações</th>
+			</tr>
+		</table>
+		Total: <span id="total_alunos">0</span>
+	</div>	
+</body>

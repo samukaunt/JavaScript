@@ -1,0 +1,49 @@
+function imprimir(aluno,mediaFinal){
+	var status = testaAprovado(mediaFinal);
+	alert("Aluno(a) "+aluno+" teve media final "+mediaFinal+" e está "+status);
+}
+function calculaPrimeiraMedia(nota){
+	return nota * 0.6;
+}
+function calculaSegundaMedia(nota){
+	return nota * 0.4;
+}
+function testaAprovado(nota){
+	if(nota < 3 && nota >= 0){
+		return "Reprovado";
+	} else if (nota > 3 && nota <= 5){
+		return "Recuperação";
+	} else if (nota > 5 && nota <= 7){
+		return "Aula de Reforço";
+	} else {
+		return "Aprovado";
+	}
+}
+
+var alunos = ["João da Silva","Maria da Silva","Yuri Dirickson"],
+	notas = [
+		[7,6],[8,9],[1,2]
+	],
+	medias = [],
+	mediasFinais = [];
+	/*
+	medias = [
+		[ calculaPrimeiraMedia(notas[0][0]),calculaSegundaMedia(notas[0][1])],
+		[ calculaPrimeiraMedia(notas[1][0]),calculaSegundaMedia(notas[1][1])],
+		[ calculaPrimeiraMedia(notas[2][0]),calculaSegundaMedia(notas[2][1])]
+	]
+	mediasFinais = [
+		medias[0][0] + medias[0][1],
+		medias[1][0] + medias[1][1],
+		medias[2][0] + medias[2][1]
+	]*/
+for ( var i = 0; // Variavel de Controle
+	  i < alunos.length; // Condição de Parada
+	  i++){ // Passo de incremento
+	
+	medias[i] = [
+		calculaPrimeiraMedia(notas[i][0]),calculaSegundaMedia(notas[i][1])
+	];
+	mediasFinais[i] = medias[i][0] + medias[i][1]
+	imprimir(alunos[i],mediasFinais[i]);		
+}
